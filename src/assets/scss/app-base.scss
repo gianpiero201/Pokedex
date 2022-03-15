@@ -1,0 +1,141 @@
+hr {
+  background: linear-gradient(to right, white, red, red, red, white);
+  height: 1px;
+  border: 0px;
+}
+
+.title {
+  color: #666;
+}
+
+.navbar {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  & .region {
+    margin-right: 2rem;
+    &:hover{
+      cursor: pointer;
+    }
+    &:after {
+      display:block;
+      content: '';
+      border-bottom: 3px solid black;
+      transform: scaleX(0);
+      transition: transform 200ms ease-in-out;
+    }
+    &:hover:after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.position-fixed {
+  position: fixed !important;
+}
+
+.border {
+  border-radius: 16px;
+  box-shadow: 1px 1px 5px black;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.m-1 {
+  margin: 0.375rem !important;
+}
+
+.m-2 {
+  margin: 0.75rem !important;
+}
+
+.w-0 {
+  width: 0;
+}
+
+.w-1 {
+  width: 0.375rem !important;
+}
+
+.w-2 {
+  width: 0.75rem !important;
+}
+
+.w-3 {
+  width: 1.5rem !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
+.h-0 {
+  height: 0;
+}
+
+.h-1 {
+  height: 0.375rem !important;
+}
+
+.h-2 {
+  height: 0.75rem !important;
+}
+
+.h-3 {
+  height: 1.5rem !important;
+}
+
+.h-4 {
+  height: 3rem !important;
+}
+
+.h-5 {
+  height: 4.5rem !important;
+}
+
+.h-50 {
+  height: 50% !important;
+}
+
+.h-100 {
+  height: 100% !important;
+}
+
+.top-0 {
+  top: 0;
+}
+
+.card-body {
+  margin: 2rem;
+}

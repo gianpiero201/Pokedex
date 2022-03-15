@@ -1,0 +1,16 @@
+.region-cards {
+  width: 14.4rem;
+  height: 20rem;
+  border-radius: 16px;
+  box-shadow: 1px 1px 5px black;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+}
+
+.all-region-cards{
+  flex-wrap: wrap;
+}
+
+.pokemons {
+  flex-direction: column;
+}
