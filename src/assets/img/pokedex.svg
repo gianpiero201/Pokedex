@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 250 250">
+  <path d=" m 1 115 v -90 a 29 25 0 0 1 30 -25 h 188 a 29 25 0 0 1 30 25 v 90 m -170 0 c 5 -55 85 -55 90 0
+  M 0 10
+  m 1 115 v 110 a 29 25 0 0 0 30 25 h 188 a 29 25 0 0 0 30 -25 v -110 m -170 0 c 5 55 85 55 90 0 m 0 0"
+  marker-end="url(#pos)" fill="#ff0000" stroke="#000" stroke-width="0" fill-rule="evenodd"/>
+  <path d="m 79 116 c 5 -57 85 -57 90 0 M 1 115 h 79 M 168 116 h 81 M 79 126 c 5 54 85 54 90 0 M 1 126 h 79 M 168 126 h 81" stroke="black" stroke-width="1" fill="transparent" />
+  <path d="m 80 117 c 5 -58 85 -56 88 0 M 1 116 h 80 M 167 117 h 83 M 80 125 c 5 53 85 53 88 0 M 1 126 h 79 M 168 126 h 81" stroke="white" stroke-width="2" fill="transparent" />
+  <!-- <path d="m 82 118 c 5 -56 85 -56 84 0 M 1 120 h 78 M 168 116 h 81 M 80 125 c 5 56 85 56 90 0 M 1 126 h 79 M 168 126 h 81" stroke="black" stroke-width="4" fill="transparent" /> -->
+
+</svg>

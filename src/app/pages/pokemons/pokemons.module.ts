@@ -4,6 +4,7 @@ import { PokemonsComponent } from './pokemons/pokemons.component';
 import { RouterModule } from '@angular/router';
 import { SharedComponentsModule } from 'src/shared/shared-components/shared-components.module';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     RouterModule.forChild([
       { path: '', component: PokemonsComponent}
     ]),

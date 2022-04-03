@@ -12,11 +12,16 @@ export class PokemonsService {
     private http: HttpClient
   ) { }
 
-  getPokemons() {
-    return this.http.get<{results: Pokemons[]}>('https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1126');
+  getPokemons(limit = 898,offset = 0) {
+    return this.http.get<{results: Pokemons[]}>("https://pokeapi.co/api/v2/pokemon?limit="+limit+"&offset="+offset);
   }
 
   getPokemonDetail(url: string) {
     return this.http.get<Pokemons>(url)
+  }
+
+  getPokemonOfRegion(regionId: string) {
+    return this.http.get<Pokemons>(`https://pokeapi.co/api/v2/generations/${regionId}`)
+
   }
 }
