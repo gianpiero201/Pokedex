@@ -35,6 +35,12 @@ export class Sprites {
 }
 
 export class Abilities {
+  constructor(
+    public ability: Ability
+  ) {}
+}
+
+export class Ability {
   constructor(public name: string, public url: string) {}
 }
 

@@ -8,8 +8,8 @@
 
 .card-body {
   background-color: orange;
-  background: linear-gradient(110deg, aliceblue 50%, salmon 50%),
-              linear-gradient(110deg, rgb(255, 94, 0) 80%, rgb(255, 110, 0) 60%);
+  background: linear-gradient(110deg, aliceblue 50%, salmon 50%,rgb(255, 94, 0) 80%, rgb(255, 110, 0) 60%)
+              // linear-gradient(110deg, );
 }
 
 #loading {

@@ -6,6 +6,10 @@
     (click)="openedPokedex = true; openPokedex()"
   >
     <div class="rectangle left"></div>
+    <div
+      class="position-absolute top-50 left-50 text-light"
+      style="z-index: 1055"
+      *ngIf="!isLoading">teste</div>
     <div class="rectangle right"></div>
   </div>
   <div class="card-body h-100 d-flex flex-column">
@@ -26,7 +30,7 @@
           type="search"
           [(ngModel)]="search"
           name="search"
-          (change)="filterUpdate()"
+          (input)="filterUpdate()"
         />
       </div>
     </div>
