@@ -1,72 +1,53 @@
 <app-card-body>
-  <div
-    *ngIf="!opdex"
-    class="position-absolute w-100 h-100 top-0 start-0 d-flex justify-content-between flex-row header"
-    [class.open]="openedPokedex"
-    (click)="openedPokedex = true; openPokedex()"
-  >
-    <div class="rectangle left"></div>
-    <div
-      class="position-absolute top-50 left-50 text-light"
-      style="z-index: 1055"
-      *ngIf="!isLoading">teste</div>
-    <div class="rectangle right"></div>
-  </div>
+  <app-loading [isLoading]="isLoading">
+  </app-loading>
   <div class="card-body h-100 d-flex flex-column">
-    <div>
-      <div
-        class="text-align-center flex-column"
-      >
-        <h1 class="m-0">Pokédex</h1>
-      </div>
+    <div class="header">
       <div class="d-flex flex-row justify-content-between align-items-center">
         <ul class="navbar list-unstyled w-50 h-2 text-align-center">
-          <li>Todas</li>
           <li *ngFor="let region of regions">
-            {{ region.name }}
+            <span (click)="regionClick(region)" class="cursor-pointer region-hover">{{ region.name }}</span>
           </li>
         </ul>
         <input
           type="search"
           [(ngModel)]="search"
           name="search"
-          (input)="filterUpdate()"
-        />
+          (input)="filterUpdate()"/>
       </div>
     </div>
-    <div class="h-100 d-flex flex-row justify-content-between">
-      <div class="d-flex flex-column">
-        <div>teste3</div>
-        <div>teste4</div>
-      </div>
-      <div class="w-50 d-flex flex-row-reverse overflow-auto">
-        <div class="d-flex flex-column w-75 fw-bold" [class.]>
-          <div
-            (click)="selectedPokemon = poke"
-            *ngFor="let poke of pokeFilter"
-            class="mb-2 fs-4 px-2 d-flex justify-content-between flex-row align-items-center"
-            [class.pokemons-name]="poke === selectedPokemon"
-          >
-            <div class="d-flex flex-row align-items-center w-50">
-              <div>
-                <img
-                  src="{{ poke.sprites?.front_default }}"
-                  alt="{{ poke?.name }}"
-                />
-              </div>
-              <div>
-                {{ "No. " + poke.id?.toString()?.padStart(3, "0") }}
-              </div>
+    <div class="d-flex flex-row justify-content-between pokemons-sidebar">
+      <div class="col-5 d-flex flex-column overflow-auto scrollbar">
+        <div
+          (click)="selectedPokemon = poke"
+          *ngFor="let poke of pokeFilter"
+          class="mb-2 fs-4 px-2 ms-1 d-flex justify-content-between flex-row align-items-center cursor-pointer"
+          [class.pokemons-name]="poke === selectedPokemon">
+          <div class="d-flex flex-row align-items-center w-50">
+            <div>
+              <img
+                src="{{ poke.sprites?.front_default }}"
+                alt="{{ poke?.name }}"
+              />
             </div>
-            <div class="w-50 ps-2">
-              {{ poke.name }}
+            <div>
+              {{ "No. " + poke.id?.toString()?.padStart(3, "0") }}
             </div>
+          </div>
+          <div class="w-50 text-start">
+            {{ poke.name }}
           </div>
         </div>
       </div>
+      <div class="col-7 d-flex flex-column h-100">
+        <div>{{ selectedPokemon?.name }}</div>
+        <div>teste3</div>
+        <div>teste4</div>
+      </div>
     </div>
   </div>
-  <div *ngIf="isLoading" id="loading">
-    <img src="../../../../assets/img/loading_pokeball.gif" />
-  </div>
 </app-card-body>
+
+<div *ngIf="LoadingRegion" class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
+  <img src="../../../../assets/img/loading.svg" alt="loading">
+</div>

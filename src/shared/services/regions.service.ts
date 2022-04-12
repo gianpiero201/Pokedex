@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { region } from '../models/region.model';
+import { Region } from '../models/region.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,6 @@ export class RegionsService {
   ) { }
 
   getRegioes() {
-    return this.http.get<{results: region[]}>('https://pokeapi.co/api/v2/region')
+    return this.http.get<{results: Region[]}>('https://pokeapi.co/api/v2/region')
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegionsService } from 'src/shared/services/regions.service';
-import { region } from '../../../../shared/models/region.model';
-import { Pokemons } from '../pokemons.model';
+import { Region } from '../../../../shared/models/region.model';
+import { Pokemons, Species } from '../pokemons.model';
 import { PokemonsService } from '../pokemons.service';
 
 @Component({
@@ -10,15 +10,15 @@ import { PokemonsService } from '../pokemons.service';
   styleUrls: ['./pokemons.component.scss'],
 })
 export class PokemonsComponent implements OnInit {
-  regions: region[] = [];
+  regions: Region[] = [];
 
   pokemons: Pokemons[] = [];
   pokeFilter: Pokemons[] = [];
   search: string;
   selectedPokemon: Pokemons;
+  selectedRegion: Region = {id: "-1",name: ""};
   isLoading = true;
-  openedPokedex = false;
-  opdex = false;
+  LoadingRegion = false;
 
   pag: number = 1;
 
@@ -35,19 +35,26 @@ export class PokemonsComponent implements OnInit {
   getRegions() {
     this.regionsService.getRegioes().subscribe((regions) => {
       this.regions = regions.results;
+      this.regions.forEach(r => {
+        r.id = (regions.results.indexOf(r)+1).toString();
+      })
     });
   }
 
   async getPokemons() {
-      const pokemons = await this.pokemonsService.getPokemons().toPromise() as {results: Pokemons[]};
-      this.pokemons = pokemons.results;
-      this.getPokemonDetails();
-      this.filterUpdate();
+    const pokemons = (await this.pokemonsService.getPokemons().toPromise()) as {
+      results: Pokemons[];
+    };
+    this.pokemons = pokemons.results;
+    this.selectedPokemon = pokemons.results[0];
+    this.getPokemonDetails();
   }
 
   getPokemonDetails() {
     this.pokemons.forEach(async (poke) => {
-      const pokemonsDetails = await this.pokemonsService.getPokemonDetail(poke.url).toPromise() as Pokemons;
+      const pokemonsDetails = (await this.pokemonsService
+        .getPokemonDetail(poke.url)
+        .toPromise()) as Pokemons;
       poke.abilities = pokemonsDetails.abilities;
       poke.forms = pokemonsDetails.forms;
       poke.game_indices = pokemonsDetails.game_indices;
@@ -66,29 +73,44 @@ export class PokemonsComponent implements OnInit {
       poke.weight = pokemonsDetails.weight;
     });
     setTimeout(() => {
-      this.isLoading = false;
+      this.filterUpdate();
     }, 2000);
   }
 
-  getPokemonsOfRegion() {
-    this.pokemons
+  regionClick(region: Region) {
+    this.LoadingRegion = true
+    if (this.selectedRegion.id === region.id) {
+      this.selectedRegion = {id: "-1",name: ""};
+      this.filterUpdate();
+      return;
+    }
+
+    this.selectedRegion = region;
+    this.getPokemonsOfRegion();
+  }
+
+  async getPokemonsOfRegion() {
+    const pokemonsOfRegion = (await this.pokemonsService
+      .getPokemonOfRegion(this.selectedRegion.id).toPromise() as any)['pokemon_species'] as Species[];
+
+    this.pokeFilter = this.pokemons.filter(p => {
+      return !!pokemonsOfRegion.find(pr => pr.name === p.species.name)
+    })
+
+    this.LoadingRegion = false;
   }
 
   filterUpdate() {
     const search = this.search?.toUpperCase();
 
-    this.pokeFilter = this.pokemons.filter(poke => {
-      return (!search || (
+    this.pokeFilter = this.pokemons.filter((poke) => {
+      return (
+        !search ||
         poke.name?.toUpperCase().includes(search) ||
-        poke.id?.toString().includes(search))
-       );
-    })
-  }
-
-
-  openPokedex() {
-    setTimeout(() => {
-      this.opdex = true;
-    }, 800);
+        poke.id?.toString().includes(search)
+      );
+    });
+    this.isLoading = false;
+    this.LoadingRegion = false
   }
 }

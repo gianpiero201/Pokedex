@@ -1,4 +1,4 @@
-export class region{
+export class Region{
   constructor(
     public id: string,
     public name: string

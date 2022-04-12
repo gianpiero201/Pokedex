@@ -17,11 +17,14 @@ export class PokemonsService {
   }
 
   getPokemonDetail(url: string) {
-    return this.http.get<Pokemons>(url)
+    return this.http.get<Pokemons>(url);
   }
 
   getPokemonOfRegion(regionId: string) {
-    return this.http.get<Pokemons>(`https://pokeapi.co/api/v2/generations/${regionId}`)
+    return this.http.get(`https://pokeapi.co/api/v2/generation/${regionId}`);
+  }
 
+  getPokemonSpriteGif(name: string) {
+    return this.http.get(`https://projectpokemon.org/images/sprites-models/swsh-normal-sprites/${name}.gif`)
   }
 }

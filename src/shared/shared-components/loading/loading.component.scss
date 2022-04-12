@@ -1,0 +1,65 @@
+@keyframes clickToOpen {
+  0% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+#loading {
+  position: absolute;
+  z-index: 1051;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #181b1d;
+}
+
+.header {
+  & .rectangle {
+    z-index: 1050;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background-color: #181b1d;
+    transition:all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    pointer-events:none;
+    &.left {
+      clip-path: polygon(0 0, 50% 0%, 50% 100%, 0 100%);
+    }
+    &.right {
+      clip-path: polygon(50% 0, 100% 0%, 100% 100%, 50% 100%);
+    }
+  }
+
+  &.open {
+    & .rectangle {
+      &.left {
+        clip-path: polygon(0 0, 0% 0%, 0% 100%, 0 100%);
+      }
+      &.right {
+        clip-path: polygon(100% 0, 100% 0%, 100% 100%, 100% 100%);
+      }
+    }
+  }
+}
+
+.openText {
+  animation-name: clickToOpen;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
