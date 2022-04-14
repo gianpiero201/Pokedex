@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pokemons } from './pokemons.model';
+import { Pokemon, PokemonClient, LocationClient } from 'pokenode-ts'
 
 
 @Injectable({
@@ -12,12 +12,15 @@ export class PokemonsService {
     private http: HttpClient
   ) { }
 
+  location = new LocationClient();
+  poke = new PokemonClient();
+
   getPokemons(limit = 898,offset = 0) {
-    return this.http.get<{results: Pokemons[]}>("https://pokeapi.co/api/v2/pokemon?limit="+limit+"&offset="+offset);
+    return this.http.get<{results: Pokemon[]}>("https://pokeapi.co/api/v2/pokemon?limit="+limit+"&offset="+offset);
   }
 
-  getPokemonDetail(url: string) {
-    return this.http.get<Pokemons>(url);
+  getPokemonDetail(id: number) {
+    return this.poke.getPokemonById(id);
   }
 
   getPokemonOfRegion(regionId: string) {

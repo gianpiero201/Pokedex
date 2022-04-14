@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { PokemonsComponent } from './pokemons/pokemons.component';
 import { RouterModule } from '@angular/router';
 import { SharedComponentsModule } from 'src/shared/shared-components/shared-components.module';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
       { path: '', component: PokemonsComponent}
     ]),
     SharedComponentsModule,
-    NgxPaginationModule
+    NgxChartsModule,
   ]
 })
 export class PokemonsModule { }

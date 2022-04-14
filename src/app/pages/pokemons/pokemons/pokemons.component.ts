@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Color, ScaleType } from '@swimlane/ngx-charts';
+import { Pokemon, PokemonSpecies } from 'pokenode-ts';
 import { RegionsService } from 'src/shared/services/regions.service';
 import { Region } from '../../../../shared/models/region.model';
-import { Pokemons, Species } from '../pokemons.model';
 import { PokemonsService } from '../pokemons.service';
 
 @Component({
@@ -12,15 +13,26 @@ import { PokemonsService } from '../pokemons.service';
 export class PokemonsComponent implements OnInit {
   regions: Region[] = [];
 
-  pokemons: Pokemons[] = [];
-  pokeFilter: Pokemons[] = [];
+  pokemons: Pokemon[] = [];
+  pokeFilter: Pokemon[] = [];
+  pokemonsInRegion: Pokemon[] = [];
   search: string;
-  selectedPokemon: Pokemons;
-  selectedRegion: Region = {id: "-1",name: ""};
+  selectedPokemon: Pokemon;
+  stats: {value: number, name: string}[] = []
+  selectedRegion: Region;
   isLoading = true;
   LoadingRegion = false;
+  colorScheme: Color = {
+    name: '',
+    group: ScaleType.Linear,
+    selectable: false,
+    domain: ['#00bb00','#fbff00','#ff9900','#00c4ff','#9310f7','#e12df7']
+  };
+
 
   pag: number = 1;
+
+  @ViewChild('charts') charts: ElementRef<HTMLDivElement>;
 
   constructor(
     private regionsService: RegionsService,
@@ -38,23 +50,23 @@ export class PokemonsComponent implements OnInit {
       this.regions.forEach(r => {
         r.id = (regions.results.indexOf(r)+1).toString();
       })
+      this.selectedRegion = this.regions[0];
     });
   }
 
   async getPokemons() {
     const pokemons = (await this.pokemonsService.getPokemons().toPromise()) as {
-      results: Pokemons[];
+      results: Pokemon[];
     };
     this.pokemons = pokemons.results;
-    this.selectedPokemon = pokemons.results[0];
-    this.getPokemonDetails();
+    this.getPokemonsOfRegion(this.regions[0]);
   }
 
   getPokemonDetails() {
-    this.pokemons.forEach(async (poke) => {
-      const pokemonsDetails = (await this.pokemonsService
-        .getPokemonDetail(poke.url)
-        .toPromise()) as Pokemons;
+    this.pokemonsInRegion.forEach(async (poke,index) => {
+      let pokeId = poke.url.replace("https://pokeapi.co/api/v2/pokemon/","").replace("/","");
+      const pokemonsDetails = (await this.pokemonsService.getPokemonDetail(Number.parseInt(pokeId,10)));
+
       poke.abilities = pokemonsDetails.abilities;
       poke.forms = pokemonsDetails.forms;
       poke.game_indices = pokemonsDetails.game_indices;
@@ -71,39 +83,39 @@ export class PokemonsComponent implements OnInit {
       poke.stats = pokemonsDetails.stats;
       poke.types = pokemonsDetails.types;
       poke.weight = pokemonsDetails.weight;
+
+      if (index == this.pokemonsInRegion.length-1) {
+        this.filterUpdate();
+        this.chartLoading();
+      }
     });
-    setTimeout(() => {
-      this.filterUpdate();
-    }, 2000);
   }
 
-  regionClick(region: Region) {
-    this.LoadingRegion = true
-    if (this.selectedRegion.id === region.id) {
-      this.selectedRegion = {id: "-1",name: ""};
-      this.filterUpdate();
-      return;
-    }
-
-    this.selectedRegion = region;
-    this.getPokemonsOfRegion();
-  }
-
-  async getPokemonsOfRegion() {
-    const pokemonsOfRegion = (await this.pokemonsService
-      .getPokemonOfRegion(this.selectedRegion.id).toPromise() as any)['pokemon_species'] as Species[];
-
-    this.pokeFilter = this.pokemons.filter(p => {
-      return !!pokemonsOfRegion.find(pr => pr.name === p.species.name)
+  chartLoading() {
+    this.stats = [];
+    this.selectedPokemon.stats.forEach(pokemonStat => {
+      this.stats.push({name: pokemonStat.stat.name, value: pokemonStat.base_stat})
     })
+  }
 
-    this.LoadingRegion = false;
+  async getPokemonsOfRegion(region: Region) {
+    this.LoadingRegion = true;
+    this.selectedRegion = region;
+
+    const pokemonsOfRegion = (await this.pokemonsService
+      .getPokemonOfRegion(this.selectedRegion.id).toPromise() as any)['pokemon_species'] as PokemonSpecies[];
+
+    this.pokemonsInRegion = this.pokemons.filter(p => {
+      return !!pokemonsOfRegion.find(pr => pr.name.toUpperCase() === p.name.toUpperCase())
+    })
+    this.selectedPokemon = this.pokemonsInRegion[0];
+    this.getPokemonDetails();
   }
 
   filterUpdate() {
     const search = this.search?.toUpperCase();
 
-    this.pokeFilter = this.pokemons.filter((poke) => {
+    this.pokeFilter = this.pokemonsInRegion.filter((poke) => {
       return (
         !search ||
         poke.name?.toUpperCase().includes(search) ||
@@ -111,6 +123,6 @@ export class PokemonsComponent implements OnInit {
       );
     });
     this.isLoading = false;
-    this.LoadingRegion = false
+    this.LoadingRegion = false;
   }
 }
