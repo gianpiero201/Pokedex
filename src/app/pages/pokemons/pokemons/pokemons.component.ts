@@ -33,6 +33,9 @@ export class PokemonsComponent implements OnInit {
   pag: number = 1;
 
   @ViewChild('charts') charts: ElementRef<HTMLDivElement>;
+  @ViewChild('regionsTopBar') regionsTopBar: ElementRef<HTMLDivElement>;
+  @ViewChild('topBarPokemons') topBarPokemons: ElementRef<HTMLDivElement>;
+
 
   constructor(
     private regionsService: RegionsService,
@@ -124,5 +127,18 @@ export class PokemonsComponent implements OnInit {
     });
     this.isLoading = false;
     this.LoadingRegion = false;
+  }
+
+  showLinks() {
+    const classes = this.regionsTopBar.nativeElement.classList;
+
+    if (classes.contains('show')) {
+      this.regionsTopBar.nativeElement.classList.remove('show');
+      this.topBarPokemons.nativeElement.classList.add('show');
+    } else {
+      this.regionsTopBar.nativeElement.classList.add('show');
+      this.topBarPokemons.nativeElement.classList.remove('show');
+
+    }
   }
 }

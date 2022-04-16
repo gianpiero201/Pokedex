@@ -1,9 +1,96 @@
+@media (max-width: 1050px) and (min-width: 900px) {
+  .card-body {
+    padding: 0.8rem !important;
+  }
+
+  .sidebar {
+    display: flex;
+  }
+
+  .topbar {
+    height: 10%;
+    display: flex !important;
+    font-size: 24px;
+
+    & .show {
+      display: flex !important;
+    }
+
+    & .pokemons-topbar {
+      display: flex;
+    }
+  }
+
+  .header {
+    display: none !important;
+  }
+
+  .pokemons-sidebar {
+    display: none !important;
+  }
+
+  .selected-pokemon {
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .card-body {
+    padding: 0.8rem !important;
+  }
+
+  .sidebar {
+    display: flex;
+  }
+
+  .topbar {
+    min-height: 8%;
+    display: flex !important;
+    font-size: 20px;
+
+    & .show {
+      display: flex !important;
+    }
+
+    & .pokemons-topbar {
+      display: flex;
+    }
+  }
+
+  .header {
+    display: none !important;
+  }
+
+  .pokemons-sidebar {
+    display: none !important;
+  }
+
+  .selected-pokemon {
+    width: 100%;
+  }
+  .region {
+    margin-right: 8px !important;
+  }
+}
+
+.body-pokemons {
+  min-height: 91%;
+}
+
+.topbar {
+  display: none;
+}
+
+.pokemons-topbar{
+  display: none;
+}
+
 .card-body {
-  background: linear-gradient(70deg, rgb(0, 150, 0) 40%, rgb(0, 105, 0) 40%, green 50%, aliceblue 50%)
+  background: linear-gradient(70deg, rgb(0, 150, 0) 40%, rgb(0, 105, 0) 40%, green 50%, aliceblue 50%);
 }
 
 .header {
-  height: 5%;
+  height: 10%;
   & .region-hover {
     &.selected-region {
       &::after {
@@ -31,7 +118,6 @@
 }
 
 .pokemons-sidebar {
-  height: 95%;
 
   & .pokemons {
     min-height: 100px;
@@ -52,6 +138,8 @@
       }
     }
   }
-
 }
 
+.pokename {
+  font-size: 3.5rem !important;
+}
