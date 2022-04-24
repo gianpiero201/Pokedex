@@ -1,24 +1,27 @@
-export class Pokemons {
-  constructor(
-    public name: string,
-    public url: string,
-    public abilities: Abilities[],
-    public forms: Forms[],
-    public game_indices: GameIndices[],
-    public height: number,
-    public held_items: [],
-    public id: number,
-    public is_default: boolean,
-    public location_area_encounters: string,
-    public moves: Moves[],
-    public order: number,
-    public past_types: [],
-    public species: Species,
-    public sprites: Sprites,
-    public stats: Stats[],
-    public types: Types[],
-    public weight: number
-  ) {}
+import { OtherPokemonSprites, Pokemon, VersionSprites } from 'pokenode-ts';
+
+export class Pokemons implements Pokemon {
+  public name: string;
+  public url: string;
+  public abilities: Abilities[];
+  public forms: Forms[];
+  public game_indices: GameIndices[];
+  public height: number;
+  public held_items: [];
+  public id: number;
+  public is_default: boolean;
+  public location_area_encounters: string;
+  public moves: Moves[];
+  public order: number;
+  public past_types: [];
+  public species: Species;
+  public sprites: Sprites;
+  public stats: Stats[];
+  public types: Types[];
+  public weight: number;
+  public base_experience: number;
+
+  constructor() {}
 }
 
 export class Sprites {
@@ -30,13 +33,17 @@ export class Sprites {
     public front_default: string,
     public front_female: string,
     public front_shiny: string,
-    public front_shiny_female: string
+    public front_shiny_female: string,
+    public other: OtherPokemonSprites,
+	  public versions: VersionSprites
   ) {}
 }
 
 export class Abilities {
   constructor(
-    public ability: Ability
+    public ability: Ability,
+    public is_hidden:boolean,
+    public slot: number
   ) {}
 }
 
@@ -73,8 +80,8 @@ export class Move {
 export class VersionGroupDetails {
   constructor(
     public level_learned_at: number,
-    public move_learn_method: MoveLearnMethod[],
-    public version_group: VersionGame[]
+    public move_learn_method: MoveLearnMethod,
+    public version_group: VersionGame
   ) {}
 }
 
@@ -95,7 +102,7 @@ export class Species {
 export class Stats {
   constructor(
     public base_stat: number,
-    public effort: number,
+    public effort: 0 | 1 | 2 | 3,
     public stat: Stat
   ) {}
 }

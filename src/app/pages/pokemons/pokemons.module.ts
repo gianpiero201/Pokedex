@@ -4,8 +4,7 @@ import { PokemonsComponent } from './pokemons/pokemons.component';
 import { RouterModule } from '@angular/router';
 import { SharedComponentsModule } from 'src/shared/shared-components/shared-components.module';
 import { FormsModule } from '@angular/forms';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 @NgModule({
@@ -19,7 +18,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
       { path: '', component: PokemonsComponent}
     ]),
     SharedComponentsModule,
-    NgxChartsModule,
+    NgApexchartsModule
   ]
 })
 export class PokemonsModule { }

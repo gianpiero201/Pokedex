@@ -1,14 +1,35 @@
 <app-card-body class="text-black">
   <app-loading [isLoading]="isLoading"> </app-loading>
-  <div class="card-body h-100 d-flex flex-column">
+  <div class="position-absolute h-100 w-100 top-0 start-0 card-body"
+    [class.background-selected]="!!selectedPokemon?.id"
+    [class.grass]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'grass'"
+    [class.poison]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'poison'"
+    [class.fire]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'fire'"
+    [class.flying]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'flying'"
+    [class.psychic]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'psychic'"
+    [class.water]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'water'"
+    [class.ground]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'ground'"
+    [class.rock]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'rock'"
+    [class.electric]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'electric'"
+    [class.dragon]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'dragon'"
+    [class.bug]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'bug'"
+    [class.ice]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'ice'"
+    [class.fairy]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'fairy'"
+    [class.normal]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'normal'"
+    [class.fighting]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'fighting'"
+    [class.dark]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'dark'"
+    [class.steel]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'steel'"
+    [class.ghost]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'ghost'">
 
+  </div>
+  <div class="h-100 p-1 d-flex flex-column">
     <!-- header -->
     <div class="header mb-3">
       <div class="d-flex flex-row justify-content-between align-items-center">
-        <div class="w-50 fs-5">
+        <div class="col-4 fs-5">
           <ng-template [ngTemplateOutlet]="regionsTemplate"></ng-template>
         </div>
-        <div class="w-50 d-flex flex-row-reverse">
+        <div class="col-8 d-flex flex-row-reverse">
           <input
             class="form-control w-50"
             type="search"
@@ -24,19 +45,19 @@
 
     <!-- topbar -->
     <div class="topbar w-100 flex-row">
-        <div class="col-1 d-flex flex-column justify-content-center text-center">
-          <a (click)="showLinks()">
-            <span class="fa-solid fa-bars"></span>
-          </a>
-        </div>
+      <div class="col-1 d-flex flex-column justify-content-center text-center">
+        <a (click)="showLinks()">
+          <span class="fa-solid fa-bars"></span>
+        </a>
+      </div>
 
-        <div class="d-none flex-row justify-content-around col-11" #regionsTopBar>
-          <ng-template [ngTemplateOutlet]="regionsTemplate"></ng-template>
-        </div>
+      <div class="d-none flex-row justify-content-around col-11" #regionsTopBar>
+        <ng-template [ngTemplateOutlet]="regionsTemplate"></ng-template>
+      </div>
 
-        <div class="col-11 d-none show" #topBarPokemons>
-          <ng-template [ngTemplateOutlet]="pokemonsTopBar"></ng-template>
-        </div>
+      <div class="col-11 d-none show" #topBarPokemons>
+        <ng-template [ngTemplateOutlet]="pokemonsTopBar"></ng-template>
+      </div>
     </div>
     <!-- fim topbar -->
 
@@ -47,71 +68,61 @@
 
       <!-- selectedPokemon -->
       <div
-        class="col-6 d-flex flex-column justify-content-between selected-pokemon"
+        *ngIf="!!selectedPokemon?.id"
+        class="col-8 d-flex flex-column justify-content-between selected-pokemon"
       >
-        <div class="d-flex flex-column w-100 align-items-center">
-          <div>
-            <h1 class="pokename">{{ selectedPokemon?.name | titlecase }}</h1>
+        <div class="w-100">
+          <div class="d-flex flex-column w-100 align-items-center ps-5 pokemonNameImg">
+            <div>
+              <h1 class="pokename">{{ selectedPokemon?.name | titlecase }}</h1>
+            </div>
+            <div>
+              <img
+                class="w-100"
+                style="max-width: 385px"
+                src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{
+                  selectedPokemon.id.toString().padStart(3, '0')
+                }}.png"
+                alt="{{ selectedPokemon?.name }}"
+              />
+            </div>
           </div>
-          <div>
-            <img class="w-100" style="max-width: 385px;"
-              src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{
-                !!selectedPokemon?.id
-                  ? selectedPokemon.id.toString().padStart(3, '0')
-                  : '000'
-              }}.png"
-              alt="{{ selectedPokemon?.name }}"
-            />
-          </div>
-        </div>
-        <div class="w-100 d-flex flex-row justify-content-center">
-          <div *ngFor="let type of selectedPokemon?.types" class="fs-4 fw-bold me-3">
-            <div class="border border-1 border-dark border rounded-start rounded-end py-1 px-3"
-              [class.grass]="type.type.name === 'grass'"
-              [class.poison]="type.type.name === 'poison'"
-              [class.fire]="type.type.name === 'fire'"
-              [class.flying]="type.type.name === 'flying'"
-              [class.psychic]="type.type.name === 'psychic'"
-              [class.water]="type.type.name === 'water'"
-              [class.ground]="type.type.name === 'ground'"
-              [class.rock]="type.type.name === 'rock'"
-              [class.electric]="type.type.name === 'electric'"
-              [class.dragon]="type.type.name === 'dragon'"
-              [class.bug]="type.type.name === 'bug'"
-              [class.ice]="type.type.name === 'ice'"
-              [class.fairy]="type.type.name === 'fairy'"
-              [class.normal]="type.type.name === 'normal'"
-              [class.fighting]="type.type.name === 'fighting'"
-              [class.dark]="type.type.name === 'dark'"
-              [class.steel]="type.type.name === 'steel'"
-              [class.ghost]="type.type.name === 'ghost'">{{ type.type.name | titlecase }}</div>
-          </div>
-        </div>
-        <div class="w-100 d-flex flex-column mt-2">
-          <div class="mb-4 text-black">
-            <h2>Status</h2>
-          </div>
-          <div *ngFor="let a of selectedPokemon?.stats" class="w-100 h-3 mb-3">
-            <div class="d-flex flex-row">
-              <div class="col-2">
-                <span class="text-right fw-bold text-black">
-                  {{ a.stat.name | titlecase }}
-                </span>
-              </div>
-              <div class="col-10 h-100 border border-dark">
-                <div
-                  class="progress-bar h-100 bg-danger rounded-sm"
-                  role="progressbar"
-                  [style.width]="(a.base_stat * 100) / 255 + '%'">
-                  {{ a.base_stat }}
-                </div>
+          <div class="w-100 d-flex flex-row justify-content-center ps-5 pokemonTypes">
+            <div
+              *ngFor="let type of selectedPokemon?.types"
+              class="fs-4 fw-bold me-3"
+            >
+              <div
+                class="border border-1 border-dark border rounded-start rounded-end py-1 px-3"
+                [class.grass]="type.type.name === 'grass'"
+                [class.poison]="type.type.name === 'poison'"
+                [class.fire]="type.type.name === 'fire'"
+                [class.flying]="type.type.name === 'flying'"
+                [class.psychic]="type.type.name === 'psychic'"
+                [class.water]="type.type.name === 'water'"
+                [class.ground]="type.type.name === 'ground'"
+                [class.rock]="type.type.name === 'rock'"
+                [class.electric]="type.type.name === 'electric'"
+                [class.dragon]="type.type.name === 'dragon'"
+                [class.bug]="type.type.name === 'bug'"
+                [class.ice]="type.type.name === 'ice'"
+                [class.fairy]="type.type.name === 'fairy'"
+                [class.normal]="type.type.name === 'normal'"
+                [class.fighting]="type.type.name === 'fighting'"
+                [class.dark]="type.type.name === 'dark'"
+                [class.steel]="type.type.name === 'steel'"
+                [class.ghost]="type.type.name === 'ghost'"
+              >
+                {{ type.type.name | titlecase }}
               </div>
             </div>
           </div>
         </div>
+        <div class="w-100">
+          <ng-template [ngTemplateOutlet]="chart"></ng-template>
+        </div>
       </div>
       <!-- fim selectedPokemon -->
-
     </div>
   </div>
 </app-card-body>
@@ -120,35 +131,37 @@
   *ngIf="LoadingRegion"
   class="position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center"
 >
-  <img src="../../../../assets/img/loading.svg" alt="loading"/>
+  <img src="../../../../assets/img/loading.svg" alt="loading" />
 </div>
 
 <ng-template #regionsTemplate>
   <ul class="h-100 navbar list-unstyled col-11 text-align-center m-0">
-    <li *ngFor="let region of regions" class="me-3 region">
+    <li *ngFor="let region of regions" class="me-2 region">
       <span
         (click)="getPokemonsOfRegion(region)"
         class="cursor-pointer region-hover"
         [class.selected-region]="region === selectedRegion"
-        ><b class="regions">{{ region.name | titlecase }}</b></span>
+        ><b class="regions">{{ region.name | titlecase }}</b></span
+      >
     </li>
   </ul>
 </ng-template>
 
 <ng-template #pokemonsSideBar>
   <div
-    class="col-5 h-100 d-flex flex-column justify-content-between overflow-auto scrollbar pokemons-sidebar"
+    class="col-4 h-100 d-flex flex-column overflow-auto scrollbar pokemons-sidebar"
   >
     <div
-      (click)="selectedPokemon = poke; chartLoading()"
+      (click)="selectPokemon(poke); sumStatus()"
       *ngFor="let poke of pokeFilter"
-      class="mb-2 h-100 fs-4 px-2 ms-1 d-flex flex-row align-items-center cursor-pointer pokemons"
+      class="mb-2 fs-4 ms-1 d-flex flex-row align-items-center cursor-pointer pokemons"
       [class.pokemons-name]="poke === selectedPokemon"
       [class.pokemons-hover]="poke !== selectedPokemon"
     >
       <div class="d-flex flex-row align-items-center w-50">
         <div>
-          <img class="w-100"
+          <img
+            class="w-100"
             src="{{ poke.sprites?.front_default }}"
             alt="{{ poke?.name }}"
           />
@@ -157,28 +170,60 @@
           <b>{{ "No. " + poke.id?.toString()?.padStart(3, "0") }}</b>
         </div>
       </div>
-      <div class="w-50 text-start">
+      <div class="w-50 text-start px-2 text-dark">
         <b>{{ poke.name | titlecase }}</b>
       </div>
     </div>
   </div>
 </ng-template>
 
-
-
 <ng-template #pokemonsTopBar>
   <div
-    class="col-12 d-flex flex-row justify-content-between overflow-auto pokemons-topbar">
+    class="col-12 d-flex flex-row justify-content-between overflow-auto pokemons-topbar"
+  >
     <div
-      (click)="selectedPokemon = poke; chartLoading()"
+      (click)="selectedPokemon = poke; sumStatus()"
       *ngFor="let poke of pokeFilter"
       class="w-5 me-3 d-flex flex-column align-items-center justify-content-center cursor-pointer pokemons"
       [class.pokemons-name]="poke === selectedPokemon"
-      [class.pokemons-hover]="poke !== selectedPokemon">
-      <img class="w-4"
+      [class.pokemons-hover]="poke !== selectedPokemon"
+    >
+      <img
+        class="w-4"
         src="{{ poke.sprites?.front_default }}"
         alt="{{ poke?.name }}"
       />
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #chart>
+  <div class="chart w-100 ps-5 d-flex flex-column mt-2">
+    <div class="mb-4 text-black">
+      <h2>Status</h2>
+    </div>
+    <div *ngFor="let a of selectedPokemon?.stats" class="w-100 h-3 mb-3">
+      <div class="d-flex flex-row">
+        <div class="col-2">
+          <span class="text-right fw-bold">
+            {{ a.stat.name | titlecase }}
+          </span>
+        </div>
+        <div class="col-10 h-100 border border-dark rounded-start rounded-end">
+          <div
+            class="progress-bar text-dark h-100 rounded-start"
+            [class.hp]="a.stat.name === 'hp'"
+            [class.attack]="a.stat.name === 'attack'"
+            [class.defense]="a.stat.name === 'defense'"
+            [class.special-attack]="a.stat.name === 'special-attack'"
+            [class.special-defense]="a.stat.name === 'special-defense'"
+            [class.speed]="a.stat.name === 'speed'"
+            [style.width]="(a.base_stat * 100) / 255 + '%'"
+          >
+            {{ a.base_stat }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>

@@ -1,5 +1,44 @@
+@use "../../../../assets/scss/keyframes.scss" as keyframes;
+@import url(../../../../assets/scss/keyframes.scss);
+
+$--red: 200;
+$--green: 200;
+$--blue: 200;
+
+$grass: rgb(187, 255, 0);
+$poison: rgb(190, 121, 190);
+$fire: rgb(255, 55, 0);
+$flying: rgb(121, 189, 215);
+$psychic: rgb(220, 121, 201);
+$water: rgb(0, 149, 230);
+$ground: rgb(205, 161, 66);
+$rock: rgb(159, 120, 80);
+$electric: rgb(230, 184, 0);
+$dragon: rgb(60, 100, 200);
+$bug: rgb(49, 180, 49);
+$ice: rgb(0, 184, 240);
+$fairy: rgb(255, 128, 185);
+$normal: rgb(161, 161, 161);
+$fighting: rgb(199, 86, 0);
+$dark: rgb(99, 99, 99);
+$steel: rgb(152, 182, 221);
+$ghost: rgb(142, 122, 240);
+
 @media (max-width: 1050px) and (min-width: 900px) {
+  .chart {
+    padding: 0 !important;
+  }
+
+  .pokemonNameImg {
+    padding: 0 !important;
+  }
+
+  .pokemonTypes {
+    padding: 0 !important;
+  }
+
   .card-body {
+    background: aliceblue !important;
     padding: 0.8rem !important;
   }
 
@@ -31,11 +70,25 @@
 
   .selected-pokemon {
     width: 100%;
+    flex-direction: column !important;
   }
 }
 
 @media (max-width: 900px) {
+  .chart {
+    padding: 0 !important;
+  }
+
+  .pokemonNameImg {
+    padding: 0 !important;
+  }
+
+  .pokemonTypes {
+    padding: 0 !important;
+  }
+
   .card-body {
+    background: aliceblue !important;
     padding: 0.8rem !important;
   }
 
@@ -73,8 +126,20 @@
   }
 }
 
+.chart {
+  padding-left: 3.2rem !important;
+}
+
+.pokemonNameImg {
+  padding-left: 3.2rem !important;
+}
+
+.pokemonTypes {
+  padding-left: 3.2rem !important;
+}
+
 .body-pokemons {
-  min-height: 91%;
+  min-height: 90%;
 }
 
 .topbar {
@@ -86,7 +151,154 @@
 }
 
 .card-body {
-  background: linear-gradient(70deg, rgb(0, 150, 0) 40%, rgb(0, 105, 0) 40%, green 50%, aliceblue 50%);
+  z-index: -1000;
+
+  background-image: linear-gradient(70deg, rgb($--red,$--green,$--blue) calc(40% - 1px), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + 1px), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% - 1px), aliceblue calc(50% + 1px));
+
+  &.background-selected {
+    &.grass {
+      $--red: 187;
+      $--green: 255;
+      $--blue: 0;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+    &.poison {
+      $--red: 190;
+      $--green: 121;
+      $--blue: 190;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.fire {
+      $--red: 255;
+      $--green: 55;
+      $--blue: 0;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.flying {
+      $--red: 121;
+      $--green: 189;
+      $--blue: 215;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.psychic {
+      $--red: 220;
+      $--green: 121;
+      $--blue: 201;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.water {
+      $--red: 0;
+      $--green: 149;
+      $--blue: 230;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.ground {
+      $--red: 205;
+      $--green: 161;
+      $--blue: 66;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.rock {
+      $--red: 159;
+      $--green: 120;
+      $--blue: 80;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.electric {
+      $--red: 230;
+      $--green: 184;
+      $--blue: 0;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.dragon {
+      $--red: 60;
+      $--green: 100;
+      $--blue: 200;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.bug {
+      $--red: 49;
+      $--green: 180;
+      $--blue: 49;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.ice {
+      $--red: 0;
+      $--green: 184;
+      $--blue: 240;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.fairy {
+      $--red: 255;
+      $--green: 128;
+      $--blue: 185;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.normal {
+      $--red: 161;
+      $--green: 161;
+      $--blue: 161;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.fighting {
+      $--red: 199;
+      $--green: 86;
+      $--blue: 0;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.dark {
+      $--red: 99;
+      $--green: 99;
+      $--blue: 99;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.steel {
+      $--red: 152;
+      $--green: 182;
+      $--blue: 221;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+
+    &.ghost {
+      $--red: 142;
+      $--green: 122;
+      $--blue: 240;
+      background-image: keyframes.selectType($--red,$--green,$--blue);
+      animation: selectPokemon .7s linear;
+    }
+  }
 }
 
 .header {
@@ -121,20 +333,22 @@
 
   & .pokemons {
     min-height: 100px;
+    padding: 1rem;
+
 
     &.pokemons-name {
       border: 1px solid black;
-      border-radius: 32px;
-      background: -webkit-linear-gradient(30deg, black 50%, rgb(0, 123, 0) 50%);
+      border-radius: 16px;
+      background: -webkit-linear-gradient(30deg, black 50%, rgb($--red,$--green,$--blue) 50%);
       color: white;
     }
 
     &.pokemons-hover {
-      border-radius: 32px;
+      border-radius: 16px;
       &:hover {
         color: white;
         border: 1px solid black;
-        background: -webkit-linear-gradient(30deg, black 50%, rgb(0, 123, 0) 50%);
+        background: -webkit-linear-gradient(30deg, black 50%, rgb($--red,$--green,$--blue) 50%);
       }
     }
   }
@@ -142,4 +356,100 @@
 
 .pokename {
   font-size: 3.5rem !important;
+}
+
+.grass {
+  background-color: $grass;
+}
+
+.poison {
+  background-color: $poison;
+}
+
+.fire {
+  background-color: $fire;
+}
+
+.flying {
+  background-color: $flying;
+}
+
+.psychic {
+  background-color: $psychic;
+}
+
+.water {
+  background-color: $water;
+}
+
+.ground {
+  background-color: $ground;
+}
+
+.rock {
+  background-color: $rock;
+}
+
+.electric {
+  background-color: $electric;
+}
+
+.dragon {
+  background-color: $dragon;
+}
+
+.bug {
+  background-color: $bug;
+}
+
+.ice {
+  background-color: $ice;
+}
+
+.fairy {
+  background-color: $fairy;
+}
+
+.normal {
+  background-color: $normal;
+}
+
+.fighting {
+  background-color: $fighting;
+}
+
+.dark {
+  background-color: $dark;
+}
+
+.steel {
+  background-color: $steel;
+}
+
+.ghost {
+  background-color: $ghost;
+}
+
+.hp {
+  background-color: #53cd5b;
+}
+
+.attack {
+  background-color: #f6de52;
+}
+
+.defense {
+  background-color: #ed7f0f;
+}
+
+.special-attack {
+  background-color: #56b0f1;
+}
+
+.special-defense {
+  background-color: #ad62f6;
+}
+
+.speed {
+  background-color: #f06ace;
 }
