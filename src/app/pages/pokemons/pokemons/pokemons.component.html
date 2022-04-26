@@ -22,7 +22,7 @@
     [class.ghost]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'ghost'">
 
   </div>
-  <div class="h-100 p-1 d-flex flex-column">
+  <div class="h-100 p-3 d-flex flex-column">
     <!-- header -->
     <div class="header mb-3">
       <div class="d-flex flex-row justify-content-between align-items-center">
@@ -154,7 +154,7 @@
     <div
       (click)="selectPokemon(poke); sumStatus()"
       *ngFor="let poke of pokeFilter"
-      class="mb-2 fs-4 ms-1 d-flex flex-row align-items-center cursor-pointer pokemons"
+      class="mb-2 me-2 fs-4 ms-1 d-flex flex-row align-items-center cursor-pointer pokemons"
       [class.pokemons-name]="poke === selectedPokemon"
       [class.pokemons-hover]="poke !== selectedPokemon"
     >
