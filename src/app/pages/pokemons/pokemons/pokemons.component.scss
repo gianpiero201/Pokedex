@@ -157,8 +157,8 @@ $ghost: rgb(142, 122, 240);
 
   &.background-selected {
     &.grass {
-      $--red: 187;
-      $--green: 255;
+      $--red: 92;
+      $--green: 177;
       $--blue: 0;
       background-image: keyframes.selectType($--red,$--green,$--blue);
       animation: selectPokemon .7s linear;
@@ -173,7 +173,7 @@ $ghost: rgb(142, 122, 240);
 
     &.fire {
       $--red: 255;
-      $--green: 55;
+      $--green: 106;
       $--blue: 0;
       background-image: keyframes.selectType($--red,$--green,$--blue);
       animation: selectPokemon .7s linear;

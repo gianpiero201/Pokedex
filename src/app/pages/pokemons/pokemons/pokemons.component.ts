@@ -93,7 +93,7 @@ export class PokemonsComponent implements OnInit {
 
       if (index == this.pokemonsInRegion.length - 1) {
         this.filterUpdate();
-        this.selectPokemon(this.pokemonsInRegion[0]);
+        this.selectPokemon(this.selectedPokemon);
       }
     });
   }
