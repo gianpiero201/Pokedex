@@ -1,6 +1,3 @@
-export class Region{
-  constructor(
-    public id: string,
-    public name: string
-  ) {}
+export class Region {
+  constructor(public id: number, public name: string) {}
 }

@@ -24,107 +24,7 @@ $dark: rgb(99, 99, 99);
 $steel: rgb(152, 182, 221);
 $ghost: rgb(142, 122, 240);
 
-@media (max-width: 1050px) and (min-width: 900px) {
-  .chart {
-    padding: 0 !important;
-  }
 
-  .pokemonNameImg {
-    padding: 0 !important;
-  }
-
-  .pokemonTypes {
-    padding: 0 !important;
-  }
-
-  .card-body {
-    background: aliceblue !important;
-    padding: 0.8rem !important;
-  }
-
-  .sidebar {
-    display: flex;
-  }
-
-  .topbar {
-    height: 10%;
-    display: flex !important;
-    font-size: 24px;
-
-    & .show {
-      display: flex !important;
-    }
-
-    & .pokemons-topbar {
-      display: flex;
-    }
-  }
-
-  .header {
-    display: none !important;
-  }
-
-  .pokemons-sidebar {
-    display: none !important;
-  }
-
-  .selected-pokemon {
-    width: 100%;
-    flex-direction: column !important;
-  }
-}
-
-@media (max-width: 900px) {
-  .chart {
-    padding: 0 !important;
-  }
-
-  .pokemonNameImg {
-    padding: 0 !important;
-  }
-
-  .pokemonTypes {
-    padding: 0 !important;
-  }
-
-  .card-body {
-    background: aliceblue !important;
-    padding: 0.8rem !important;
-  }
-
-  .sidebar {
-    display: flex;
-  }
-
-  .topbar {
-    min-height: 8%;
-    display: flex !important;
-    font-size: 20px;
-
-    & .show {
-      display: flex !important;
-    }
-
-    & .pokemons-topbar {
-      display: flex;
-    }
-  }
-
-  .header {
-    display: none !important;
-  }
-
-  .pokemons-sidebar {
-    display: none !important;
-  }
-
-  .selected-pokemon {
-    width: 100%;
-  }
-  .region {
-    margin-right: 8px !important;
-  }
-}
 
 .chart {
   padding-left: 3.2rem !important;
@@ -355,7 +255,7 @@ $ghost: rgb(142, 122, 240);
 }
 
 .pokename {
-  font-size: 3.5rem !important;
+  font-size: 4vw !important;
 }
 
 .grass {
@@ -452,4 +352,115 @@ $ghost: rgb(142, 122, 240);
 
 .speed {
   background-color: #f06ace;
+}
+
+
+@media (max-width: 1050px) and (min-width: 900px) {
+  .chart {
+    padding: 0 !important;
+  }
+
+  .pokemonNameImg {
+    padding: 0 !important;
+  }
+
+  .pokename {
+    font-size: 7vw !important;
+  }
+
+  .pokemonTypes {
+    padding: 0 !important;
+  }
+
+  .card-body {
+    background: aliceblue !important;
+    padding: 0.8rem !important;
+  }
+
+  .sidebar {
+    display: flex;
+  }
+
+  .topbar {
+    height: 10%;
+    display: flex !important;
+    font-size: 24px;
+
+    & .show {
+      display: flex !important;
+    }
+
+    & .pokemons-topbar {
+      display: flex;
+    }
+  }
+
+  .header {
+    display: none !important;
+  }
+
+  .pokemons-sidebar {
+    display: none !important;
+  }
+
+  .selected-pokemon {
+    width: 100%;
+    flex-direction: column !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .chart {
+    padding: 0 !important;
+  }
+
+  .pokemonNameImg {
+    padding: 0 !important;
+  }
+
+  .pokemonTypes {
+    padding: 0 !important;
+  }
+
+  .pokename {
+    font-size: 9vw !important;
+  }
+
+  .card-body {
+    background: aliceblue !important;
+    padding: 0.8rem !important;
+  }
+
+  .sidebar {
+    display: flex;
+  }
+
+  .topbar {
+    min-height: 8%;
+    display: flex !important;
+    font-size: 20px;
+
+    & .show {
+      display: flex !important;
+    }
+
+    & .pokemons-topbar {
+      display: flex;
+    }
+  }
+
+  .header {
+    display: none !important;
+  }
+
+  .pokemons-sidebar {
+    display: none !important;
+  }
+
+  .selected-pokemon {
+    width: 100%;
+  }
+  .region {
+    margin-right: 8px !important;
+  }
 }

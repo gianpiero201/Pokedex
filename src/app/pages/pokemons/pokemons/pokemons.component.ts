@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
-import { Pokemon, PokemonSpecies } from 'pokenode-ts';
+import { forkJoin } from 'rxjs';
 import { RegionsService } from 'src/shared/services/regions.service';
 import { Region } from '../../../../shared/models/region.model';
-import { Pokemons } from '../pokemons.model';
+import { Pokemon } from '../pokemons.model';
 import { PokemonsService } from '../pokemons.service';
 
 @Component({
@@ -12,13 +12,18 @@ import { PokemonsService } from '../pokemons.service';
   styleUrls: ['./pokemons.component.scss'],
 })
 export class PokemonsComponent implements OnInit {
-  regions: Region[] = [];
+  regions: Region[] = [
+    {
+      id: 0,
+      name: 'Todas',
+    },
+  ];
 
   pokemons: Pokemon[] = [];
   pokeFilter: Pokemon[] = [];
   pokemonsInRegion: Pokemon[] = [];
   search: string;
-  selectedPokemon: Pokemon;
+  selectedPokemon?: Pokemon;
   stats: { value: number; name: string }[] = [];
   selectedRegion: Region;
   isLoading = true;
@@ -43,83 +48,61 @@ export class PokemonsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getRegions();
-    this.getPokemons();
+    this.isLoading = false;
+    forkJoin({
+      regions: this.getRegions(),
+      pokemons: this.getPokemons(),
+    }).subscribe({
+      next: (response) => {
+        this.pokemons = response.pokemons.data.pokemons;
+        this.pokeFilter = this.pokemons;
+
+        this.regions = [...this.regions, ...response.regions.results];
+        this.regions.forEach((r) => {
+          r.id = response.regions.results.indexOf(r) + 1;
+        });
+        this.getPokemonsOfRegion(this.regions[0]);
+      },
+      complete: () => {
+        this.isLoading = false;
+      },
+    });
+  }
+
+  getPokemons() {
+    return this.pokemonsService.getPokemons();
   }
 
   getRegions() {
-    this.regionsService.getRegioes().subscribe((regions) => {
-      this.regions = regions.results;
-      this.regions.forEach((r) => {
-        r.id = (regions.results.indexOf(r) + 1).toString();
-      });
-      this.selectedRegion = this.regions[0];
-    });
-  }
-
-  async getPokemons() {
-    const pokemons = (await this.pokemonsService.getPokemons().toPromise()) as {
-      results: Pokemon[];
-    };
-    this.pokemons = pokemons.results;
-    this.getPokemonsOfRegion(this.regions[0]);
-  }
-
-  getPokemonDetails() {
-    this.pokemonsInRegion.forEach(async (poke, index) => {
-      //let pokeId = poke.id;
-      console.log(poke.id);
-      const pokemonsDetails = await this.pokemonsService.getPokemonDetail(
-        poke.id
-      );
-
-      poke.abilities = pokemonsDetails.abilities;
-      poke.forms = pokemonsDetails.forms;
-      poke.game_indices = pokemonsDetails.game_indices;
-      poke.height = pokemonsDetails.height;
-      poke.held_items = pokemonsDetails.held_items;
-      poke.id = pokemonsDetails.id;
-      poke.is_default = pokemonsDetails.is_default;
-      poke.location_area_encounters = pokemonsDetails.location_area_encounters;
-      poke.moves = pokemonsDetails.moves;
-      poke.order = pokemonsDetails.order;
-      poke.past_types = pokemonsDetails.past_types;
-      poke.species = pokemonsDetails.species;
-      poke.sprites = pokemonsDetails.sprites;
-      poke.stats = pokemonsDetails.stats;
-      poke.types = pokemonsDetails.types;
-      poke.weight = pokemonsDetails.weight;
-
-      if (index == this.pokemonsInRegion.length - 1) {
-        this.filterUpdate();
-        this.selectPokemon(this.selectedPokemon);
-      }
-    });
+    return this.regionsService.getRegioes();
   }
 
   sumStatus() {
     this.statsSum = 0;
-    this.selectedPokemon.stats?.forEach((pokemonStat) => {
+    this.selectedPokemon?.stats?.forEach((pokemonStat) => {
       this.statsSum += pokemonStat.base_stat;
     });
   }
 
-  async getPokemonsOfRegion(region: Region) {
+  getPokemonsOfRegion(region: Region) {
     this.LoadingRegion = true;
     this.selectedRegion = region;
 
-    const pokemonsOfRegion = (
-      (await this.pokemonsService
-        .getPokemonOfRegion(this.selectedRegion.id)
-        .toPromise()) as any
-    )['pokemon_species'] as PokemonSpecies[];
+    if (region.id === 0) {
+      this.pokemonsInRegion = this.pokemons;
+    } else {
+      this.pokemonsInRegion = this.pokemons.filter((p) => {
+        return p.specy.generation.region.id == region.id;
+      });
+      if (this.selectedPokemon?.specy.generation.region.id !== region.id) {
+        this.selectedPokemon = this.pokemonsInRegion[0];
+      }
+    }
 
-    this.pokemonsInRegion = this.pokemons.filter((p) => {
-      return !!pokemonsOfRegion.find(
-        (pr) => pr.name.toUpperCase() === p.name.toUpperCase()
-      );
-    });
-    this.getPokemonDetails();
+    this.filterUpdate();
+
+    this.showLinks(true);
+    this.LoadingRegion = false;
   }
 
   filterUpdate() {
@@ -136,10 +119,10 @@ export class PokemonsComponent implements OnInit {
     this.LoadingRegion = false;
   }
 
-  showLinks() {
+  showLinks(selectedRegion = false) {
     const classes = this.regionsTopBar.nativeElement.classList;
 
-    if (classes.contains('show')) {
+    if (classes.contains('show') || selectedRegion) {
       this.regionsTopBar.nativeElement.classList.remove('show');
       this.topBarPokemons.nativeElement.classList.add('show');
     } else {
@@ -150,7 +133,7 @@ export class PokemonsComponent implements OnInit {
 
   selectPokemon(poke: Pokemon) {
     if (this.selectedPokemon === poke) {
-      this.selectedPokemon = new Pokemons();
+      this.selectedPokemon = undefined;
       return;
     }
     this.selectedPokemon = poke;

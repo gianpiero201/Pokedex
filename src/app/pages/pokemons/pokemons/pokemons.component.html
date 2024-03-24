@@ -1,30 +1,66 @@
 <app-card-body class="text-black">
   <app-loading [isLoading]="isLoading"> </app-loading>
-  <div class="position-absolute h-100 w-100 top-0 start-0 card-body"
-    [class.background-selected]="!!selectedPokemon?.id"
-    [class.grass]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'grass'"
-    [class.poison]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'poison'"
-    [class.fire]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'fire'"
-    [class.flying]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'flying'"
-    [class.psychic]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'psychic'"
-    [class.water]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'water'"
-    [class.ground]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'ground'"
-    [class.rock]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'rock'"
-    [class.electric]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'electric'"
-    [class.dragon]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'dragon'"
-    [class.bug]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'bug'"
-    [class.ice]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'ice'"
-    [class.fairy]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'fairy'"
-    [class.normal]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'normal'"
-    [class.fighting]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'fighting'"
-    [class.dark]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'dark'"
-    [class.steel]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'steel'"
-    [class.ghost]="!!selectedPokemon?.id && selectedPokemon.types[0].type.name === 'ghost'">
-
-  </div>
-  <div class="h-100 p-3 d-flex flex-column">
+  <div
+    class="position-absolute h-100 w-100 top-0 start-0 card-body"
+    [class.background-selected]="!!selectedPokemon"
+    [class.grass]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'grass'
+    "
+    [class.poison]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'poison'
+    "
+    [class.fire]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'fire'
+    "
+    [class.flying]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'flying'
+    "
+    [class.psychic]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'psychic'
+    "
+    [class.water]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'water'
+    "
+    [class.ground]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'ground'
+    "
+    [class.rock]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'rock'
+    "
+    [class.electric]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'electric'
+    "
+    [class.dragon]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'dragon'
+    "
+    [class.bug]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'bug'
+    "
+    [class.ice]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'ice'
+    "
+    [class.fairy]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'fairy'
+    "
+    [class.normal]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'normal'
+    "
+    [class.fighting]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'fighting'
+    "
+    [class.dark]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'dark'
+    "
+    [class.steel]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'steel'
+    "
+    [class.ghost]="
+      !!selectedPokemon && selectedPokemon.types[0].type.name === 'ghost'
+    "
+  ></div>
+  <div class="h-100 d-flex flex-column">
     <!-- header -->
-    <div class="header mb-3">
+    <header class="header mb-3">
       <div class="d-flex flex-row justify-content-between align-items-center">
         <div class="col-4 fs-5">
           <ng-template [ngTemplateOutlet]="regionsTemplate"></ng-template>
@@ -34,13 +70,13 @@
             class="form-control w-50"
             type="search"
             [(ngModel)]="search"
-            name="search"
             (input)="filterUpdate()"
+            name="search"
             placeholder="Pesquisar"
           />
         </div>
       </div>
-    </div>
+    </header>
     <!-- fim header -->
 
     <!-- topbar -->
@@ -68,26 +104,27 @@
 
       <!-- selectedPokemon -->
       <div
-        *ngIf="!!selectedPokemon?.id"
+        *ngIf="!!selectedPokemon"
         class="col-8 d-flex flex-column justify-content-between selected-pokemon"
       >
-        <div class="w-100">
-          <div class="d-flex flex-column w-100 align-items-center ps-5 pokemonNameImg">
-            <div>
-              <h1 class="pokename">{{ selectedPokemon?.name | titlecase }}</h1>
-            </div>
-            <div>
-              <img
-                class="w-100"
-                style="max-width: 385px"
-                src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{
-                  selectedPokemon.id.toString().padStart(3, '0')
-                }}.png"
-                alt="{{ selectedPokemon?.name }}"
-              />
-            </div>
+        <div class="w-100 d-flex flex-column content align-items-center">
+          <div
+            class="d-flex flex-column w-100 align-items-center pokemonNameImg"
+            style="max-width: min-content"
+          >
+            <h1 class="pokename">{{ selectedPokemon.name | titlecase }}</h1>
+            <img
+              class="w-100"
+              style="max-width: 195px"
+              src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{
+                selectedPokemon.id.toString().padStart(3, '0')
+              }}.png"
+              alt="{{ selectedPokemon.name }}"
+            />
           </div>
-          <div class="w-100 d-flex flex-row justify-content-center ps-5 pokemonTypes">
+          <div
+            class="w-100 d-flex flex-row justify-content-center pokemonTypes"
+          >
             <div
               *ngFor="let type of selectedPokemon?.types"
               class="fs-4 fw-bold me-3"
@@ -162,12 +199,18 @@
         <div>
           <img
             class="w-100"
-            src="{{ poke.sprites?.front_default }}"
+            style="max-width: 70px"
+            src="{{
+              poke.sprites[0].front_default ??
+                'https://assets.pokemon.com/assets/cms2/img/pokedex/full/' +
+                  poke.id +
+                  '.png'
+            }}"
             alt="{{ poke?.name }}"
           />
         </div>
         <div>
-          <b>{{ "No. " + poke.id?.toString()?.padStart(3, "0") }}</b>
+          <b>{{ "No. " + poke.id.toString().padStart(3, "0") }}</b>
         </div>
       </div>
       <div class="w-50 text-start px-2 text-dark">
@@ -190,7 +233,12 @@
     >
       <img
         class="w-4"
-        src="{{ poke.sprites?.front_default }}"
+        src="{{
+          poke.sprites[0].front_default ??
+            'https://assets.pokemon.com/assets/cms2/img/pokedex/full/' +
+              poke.id +
+              '.png'
+        }}"
         alt="{{ poke?.name }}"
       />
     </div>
