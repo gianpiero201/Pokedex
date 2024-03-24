@@ -1,0 +1,18 @@
+<div
+  *ngIf="!opdex"
+  class="position-absolute w-100 h-100 top-0 start-0 d-flex justify-content-between flex-row header"
+  [class.open]="openedPokedex"
+  (click)="openedPokedex = true; openPokedex()">
+  <div class="rectangle left"></div>
+  <div
+    class="w-100 position-absolute top-50 text-center text-light openText"
+    style="z-index: 1055"
+    *ngIf="!isLoading && !openedPokedex">
+    <span>Clique para abrir</span>
+  </div>
+  <div class="rectangle right"></div>
+</div>
+
+<div *ngIf="isLoading" id="loading">
+  <img src="../../../../assets/img/loading_pokeball.gif" />
+</div>

@@ -1,0 +1,137 @@
+$--red: 200;
+$--green: 200;
+$--blue: 200;
+
+
+@function selectType($_red,$_green,$_blue) {
+  $--red: $_red;
+  $--green: $_green;
+  $--blue: $_blue;
+  @return linear-gradient(270deg, rgb($--red,$--green,$--blue) 54%, rgb(($--red)-30,($--green)-30,($--blue)-30) 54%, rgb(($--red)-30,($--green)-30,($--blue)-30) 64%, aliceblue 64%);
+};
+
+@keyframes selectPokemon {
+  0% {
+    background-image: linear-gradient(70deg, rgb($--red,$--green,$--blue) 40%, rgb(($--red)-30,($--green)-30,($--blue)-30) 40%, rgb(($--red)-30,($--green)-30,($--blue)-30) 50%, aliceblue 50%);
+  }
+  4% {
+    background-image: linear-gradient(75deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 1)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347%*1)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347%*1)) aliceblue calc(50% + (.347%*1)));
+  }
+  7% {
+    background-image: linear-gradient(80deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 2)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 2)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 2)), aliceblue calc(50% + (.347% * 2)));
+  }
+  10% {
+    background-image: linear-gradient(85deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 3)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 3)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 3)), aliceblue calc(50% + (.347% * 3)));
+  }
+  12% {
+    background-image: linear-gradient(90deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 4)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 4)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 4)), aliceblue calc(50% + (.347% * 4)));
+  }
+  15% {
+    background-image: linear-gradient(95deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 5)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 5)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 5)), aliceblue calc(50% + (.347% * 5)));
+  }
+  17% {
+    background-image: linear-gradient(100deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 6)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 6)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 6)), aliceblue calc(50% + (.347% * 6)));
+  }
+  20% {
+    background-image: linear-gradient(105deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 7)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 7)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 7)), aliceblue calc(50% + (.347% * 7)));
+  }
+  22% {
+    background-image: linear-gradient(110deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 8)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 8)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 8)), aliceblue calc(50% + (.347% * 8)));
+  }
+  25% {
+    background-image: linear-gradient(115deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 9)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 9)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 9)), aliceblue calc(50% + (.347% * 9)));
+  }
+  27% {
+    background-image: linear-gradient(120deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 10)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 10)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 10)), aliceblue calc(50% + (.347% * 10)));
+  }
+  30% {
+    background-image: linear-gradient(125deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 11)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 11)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 11)), aliceblue calc(50% + (.347% * 11)));
+  }
+  32% {
+    background-image: linear-gradient(130deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 12)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 12)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 12)), aliceblue calc(50% + (.347% * 12)));
+  }
+  35% {
+    background-image: linear-gradient(135deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 13)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 13)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 13)), aliceblue calc(50% + (.347% * 13)));
+  }
+  37% {
+    background-image: linear-gradient(140deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 14)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 14)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 14)), aliceblue calc(50% + (.347% * 14)));
+  }
+  40% {
+    background-image: linear-gradient(145deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 15)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 15)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 15)), aliceblue calc(50% + (.347% * 15)));
+  }
+  42% {
+    background-image: linear-gradient(150deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 16)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 16)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 16)), aliceblue calc(50% + (.347% * 16)));
+  }
+  45% {
+    background-image: linear-gradient(155deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 17)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 17)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 17)), aliceblue calc(50% + (.347% * 17)));
+  }
+  47% {
+    background-image: linear-gradient(160deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 18)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 18)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 18)), aliceblue calc(50% + (.347% * 18)));
+  }
+  50% {
+    background-image: linear-gradient(165deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 19)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 19)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 19)), aliceblue calc(50% + (.347% * 19)));
+  }
+  52% {
+    background-image: linear-gradient(170deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 20)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 20)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 20)), aliceblue calc(50% + (.347% * 20)));
+  }
+  55% {
+    background-image: linear-gradient(175deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 21)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 21)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 21)), aliceblue calc(50% + (.347% * 21)));
+  }
+  57% {
+    background-image: linear-gradient(180deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 22)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 22)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 22)), aliceblue calc(50% + (.347% * 22)));
+  }
+  60% {
+    background-image: linear-gradient(185deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 23)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 23)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 23)), aliceblue calc(50% + (.347% * 23)));
+  }
+  62% {
+    background-image: linear-gradient(190deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 24)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 24)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 24)), aliceblue calc(50% + (.347% * 24)));
+  }
+  65% {
+    background-image: linear-gradient(195deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 25)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 25)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 25)), aliceblue calc(50% + (.347% * 25)));
+  }
+  67% {
+    background-image: linear-gradient(200deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 26)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 26)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 26)), aliceblue calc(50% + (.347% * 26)));
+  }
+  70% {
+    background-image: linear-gradient(205deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 27)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 27)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 27)), aliceblue calc(50% + (.347% * 27)));
+  }
+  72% {
+    background-image: linear-gradient(210deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 28)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 28)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 28)), aliceblue calc(50% + (.347% * 28)));
+  }
+  75% {
+    background-image: linear-gradient(215deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 29)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 29)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 29)), aliceblue calc(50% + (.347% * 29)));
+  }
+  77% {
+    background-image: linear-gradient(220deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 30)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 30)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 30)), aliceblue calc(50% + (.347% * 30)));
+  }
+  80% {
+    background-image: linear-gradient(225deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 31)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 31)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 31)), aliceblue calc(50% + (.347% * 31)));
+  }
+  82% {
+    background-image: linear-gradient(230deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 32)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 32)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 32)), aliceblue calc(50% + (.347% * 32)));
+  }
+  85% {
+    background-image: linear-gradient(235deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 33)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 33)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 33)), aliceblue calc(50% + (.347% * 33)));
+  }
+  87% {
+    background-image: linear-gradient(240deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 34)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 34)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 34)), aliceblue calc(50% + (.347% * 34)));
+  }
+  90% {
+    background-image: linear-gradient(245deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 35)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 35)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 35)), aliceblue calc(50% + (.347% * 35)));
+  }
+  92% {
+    background-image: linear-gradient(250deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 36)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 36)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 36)), aliceblue calc(50% + (.347% * 36)));
+  }
+  95% {
+    background-image: linear-gradient(255deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 37)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 37)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 37)), aliceblue calc(50% + (.347% * 37)));
+  }
+  97% {
+    background-image: linear-gradient(260deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 38)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 38)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 38)), aliceblue calc(50% + (.347% * 38)));
+  }
+  99% {
+    background-image: linear-gradient(265deg, rgb($--red,$--green,$--blue) calc(40% + (.347% * 39)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(40% + (.347% * 39)), rgb(($--red)-30,($--green)-30,($--blue)-30) calc(50% + (.347% * 39)), aliceblue calc(50% + (.347% * 39)));
+  }
+  100% {
+    background-image: linear-gradient(270deg, rgb($--red,$--green,$--blue) 54%, rgb(($--red)-30,($--green)-30,($--blue)-30) 54%, rgb(($--red)-30,($--green)-30,($--blue)-30) 64%, aliceblue 64%);
+  }
+}
