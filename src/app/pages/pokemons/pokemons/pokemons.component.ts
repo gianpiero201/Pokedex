@@ -67,11 +67,10 @@ export class PokemonsComponent implements OnInit {
 
   getPokemonDetails() {
     this.pokemonsInRegion.forEach(async (poke, index) => {
-      let pokeId = poke.url
-        .replace('https://pokeapi.co/api/v2/pokemon/', '')
-        .replace('/', '');
+      //let pokeId = poke.id;
+      console.log(poke.id);
       const pokemonsDetails = await this.pokemonsService.getPokemonDetail(
-        Number.parseInt(pokeId, 10)
+        poke.id
       );
 
       poke.abilities = pokemonsDetails.abilities;
